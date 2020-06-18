@@ -1,34 +1,34 @@
 package Leees.Tablist;
 
-import Leees.Tablist.Tablist.Tablist;
+import Leees.Tablist.Tablist.tablist;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements Listener {
     FileConfiguration config = this.getConfig();
     public static long starttime;
-
     public static Main getPlugin() {
         return (Main)getPlugin(Main.class);
     }
-
     public void onEnable() {
-        this.config.getString("tablist.name");
-        this.config.getString("tablist.message");
-        this.config.getString("tablist.contact");
-        this.config.getString("tablist.discussion");
-        this.config.getString("tablist.website");
-        this.config.getString("tablist.official");
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            /*
+             * We register the EventListeneres here, when PlaceholderAPI is installed.
+             * Since all events are in the main class (this class), we simply use "this"
+             */
+            this.config.getString("tablist.header");
+            this.config.getString("tablist.footer");
+            this.config.options().copyDefaults(true);
+            this.saveConfig();
+            this.getLogger().info("LeeesTablist Enabled");
+            starttime = System.currentTimeMillis();
+            this.getCommand("tabrconfig").setExecutor(new config());
+            Bukkit.getScheduler().runTaskTimer(this, new tablist(), 0, 10L);
 
-        this.config.options().copyDefaults(true);
-        this.saveConfig();
-        this.getLogger().info("LeeesTablist Enabled");
-        starttime = System.currentTimeMillis();
-        this.getCommand("tabrconfig").setExecutor(new config());
-        this.getServer().getScheduler().runTaskTimer(this, new Tablist(), 0L, 20L);
-    }
-
-    public void onDisable() {
-        this.getLogger().info("LeeesTablist Disabled");
+        } else {
+            throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
+        }
     }
 }
