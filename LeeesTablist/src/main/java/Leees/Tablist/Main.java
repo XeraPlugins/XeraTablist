@@ -13,7 +13,6 @@ public class Main extends JavaPlugin implements Listener {
         return (Main)getPlugin(Main.class);
     }
     public void onEnable() {
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             /*
              * We register the EventListeneres here, when PlaceholderAPI is installed.
              * Since all events are in the main class (this class), we simply use "this"
@@ -26,9 +25,5 @@ public class Main extends JavaPlugin implements Listener {
             starttime = System.currentTimeMillis();
             this.getCommand("tabrconfig").setExecutor(new config());
             Bukkit.getScheduler().runTaskTimer(this, new tablist(), 0, 10L);
-
-        } else {
-            throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
-        }
     }
 }
