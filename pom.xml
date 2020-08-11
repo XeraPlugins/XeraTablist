@@ -88,5 +88,12 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.12.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/spigot.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
