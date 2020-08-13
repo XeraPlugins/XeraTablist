@@ -1,14 +1,17 @@
 package Leees.Tablist;
 
 import Leees.Tablist.Tablist.tablist;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
     FileConfiguration config = this.getConfig();
     public static long starttime;
+    public static boolean haspapi = false;
     public static Main getPlugin() {
         return (Main)getPlugin(Main.class);
     }
@@ -25,5 +28,17 @@ public class Main extends JavaPlugin implements Listener {
             starttime = System.currentTimeMillis();
             this.getCommand("tabrconfig").setExecutor(new config());
             Bukkit.getScheduler().runTaskTimer(this, new tablist(), 0, 10L);
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            haspapi = true;
+        }
+    }
+
+    public static String parseText(Player player, String text) {
+        if (haspapi) {
+            return PlaceholderAPI.setPlaceholders(player, text);
+        } else {
+            return text;
+        }
     }
 }

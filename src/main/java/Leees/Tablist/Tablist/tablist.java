@@ -28,27 +28,19 @@ public class tablist implements Runnable {
                 return;
             }
 
-            Iterator var1 = Bukkit.getOnlinePlayers().iterator();
-            while (var1.hasNext()) {
-                Player player = (Player) var1.next();
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
-                int ping = (Integer)entityPlayer.getClass().getField("ping").get(entityPlayer);
+                int ping = (Integer) entityPlayer.getClass().getField("ping").get(entityPlayer);
 
-                a.set(packet, new ChatComponentText(Main.getPlugin().getConfig().getString("tablist.header").replace("&", "§").replace("<line>", "\n").replace("<tps>", TabUtil.getTps())
+                a.set(packet, new ChatComponentText(Main.parseText(player, Main.getPlugin().getConfig().getString("tablist.header").replace("&", "§").replace("<line>", "\n").replace("<tps>", TabUtil.getTps())
                         .replace("<uptime>", TabUtil.GetFormattedInterval(System.currentTimeMillis() - Main.starttime))
-                        .replace("<ping>", String.valueOf(ping)).replace("<players>", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()))));
-                b.set(packet, new ChatComponentText(Main.getPlugin().getConfig().getString("tablist.footer").replace("&", "§").replace("<line>", "\n").replace("<tps>", TabUtil.getTps())
+                        .replace("<ping>", String.valueOf(ping)).replace("<players>", Integer.toString(Bukkit.getServer().getOnlinePlayers().size())))));
+                b.set(packet, new ChatComponentText(Main.parseText(player, Main.getPlugin().getConfig().getString("tablist.footer").replace("&", "§").replace("<line>", "\n").replace("<tps>", TabUtil.getTps())
                         .replace("<ping>", String.valueOf(ping)).replace("<uptime>", TabUtil.GetFormattedInterval(System.currentTimeMillis() - Main.starttime))
-                        .replace("<players>", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()))));
+                        .replace("<players>", Integer.toString(Bukkit.getServer().getOnlinePlayers().size())))));
                 ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
