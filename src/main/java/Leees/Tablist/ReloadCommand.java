@@ -6,16 +6,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-public class config implements CommandExecutor {
+public class ReloadCommand implements CommandExecutor {
+    Main main;
+    public ReloadCommand(Main main) {
+        this.main = main;
+    }
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof ConsoleCommandSender) {
-            Main.getPlugin().reloadConfig();
-            sender.sendMessage("Reloaded config");
+            main.reloadConfig();
+            sender.sendMessage("Reloaded Config");
         }
 
         if (sender instanceof Player && sender.isOp()) {
-            Main.getPlugin().reloadConfig();
-            sender.sendMessage("Reloaded config");
+            main.reloadConfig();
+            sender.sendMessage("Reloaded Config");
         }
 
         return true;

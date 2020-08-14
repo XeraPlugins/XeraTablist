@@ -1,11 +1,11 @@
 name: LeeesTablist
-version: 2.0.1
+version: 2.1.0
 main: Leees.Tablist.Main
 authors: [Nate, Legault]
-description: A tablist plugin for 6b6t
+description: A Tablist plugin for 6b6t
 website: http://6b6t.org
 softdepend: [PlaceholderAPI]
 commands:
   tabrconfig:
-    description: reload config
+    description: reload ReloadCommand
     usage: /tabrconfig
