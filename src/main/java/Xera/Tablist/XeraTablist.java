@@ -53,10 +53,10 @@ public class XeraTablist extends JavaPlugin implements Listener {
 
         // Custom Placeholders
         newtext = newtext
-                .replaceAll("<tps>", TabUtil.getTps())
-                .replaceAll("<ping>", String.valueOf(ping))
-                .replaceAll("<uptime>", TabUtil.GetFormattedInterval(System.currentTimeMillis() - XeraTablist.starttime))
-                .replaceAll("<players>", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
+                .replaceAll("%tps%", TabUtil.getTps())
+                .replaceAll("%ping%", String.valueOf(ping))
+                .replaceAll("%uptime%", TabUtil.GetFormattedInterval(System.currentTimeMillis() - XeraTablist.starttime))
+                .replaceAll("%players%", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
 
         return newtext;
     }

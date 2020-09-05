@@ -1,15 +1,17 @@
+# It's recommended to change every "SERVERNAME" to your servers name
+
 tablist:
   header:
     - ""
-    - "&b6builders&36tools"
+    - "&bSERVERNAME"
     - ""
     - "&6This the default Tablist ReloadCommand for XeraTablist"
     - ""
   footer:
     - ""
-    - "&7tps: <tps> &7ping: &f<ping> &7players: &f<players> &7uptime: &f<uptime>"
+    - "&7tps: %tps% &7ping: &f%ping% &7players: &f%players% &7uptime: &f%uptime%"
     - ""
-    - "&7contact: nate@xera.ca"
-    - "&7discussion: http://discord.6b6t.org"
-    - "&7website: https://www.6b6t.org"
-    - "&7These are the only official 6b6t websites and contacts"
+    - "&7contact: someone@example.com"
+    - "&7discussion: http://discord.example.com"
+    - "&7website: https://www.example.com"
+    - "&7These are the only official SERVERNAME websites and contacts"
