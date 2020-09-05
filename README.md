@@ -1,6 +1,5 @@
 # XeraTablist
-[![discord](https://discord.com/api/guilds/683053832694923319/embed.png)](https://discord.gg/WWm35Tc)
+[![discord](https://discord.com/api/guilds/683053832694923319/embed.png)](https://discord.gg/WWm35Tc) [![](https://img.shields.io/badge/contributions-welcome-brightgreen)](https://github.com/XeraPlugins/XeraBungeeQueue)
 
-Tablist plugin i use for my server 6b6t.org
-
-(You need nms to compile it. Theres already a maven dependency set up. Just drop the spigot.jar in the root folder and add is as a library to get started.)
+# About
+Most advanced tablist plugin for anarchy servers out there!
