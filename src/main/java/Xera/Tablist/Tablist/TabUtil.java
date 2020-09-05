@@ -1,6 +1,6 @@
-package Leees.Tablist.Tablist;
+package Xera.Tablist.Tablist;
 
-import net.minecraft.server.v1_12_R1.MinecraftServer;
+import org.bukkit.Bukkit;
 
 public class TabUtil {
     private static String format(double tps) {
@@ -8,7 +8,7 @@ public class TabUtil {
     }
 
     public static String getTps() {
-        return format(MinecraftServer.getServer().recentTps[0]);
+        return format(Bukkit.getServer().getTPS()[0]);
     }
 
     public static String GetFormattedInterval(long ms) {

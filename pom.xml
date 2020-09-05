@@ -4,19 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Leees.Tablist.Main</groupId>
-    <artifactId>LeeesTablist</artifactId>
-    <version>2.1.0</version>
+    <groupId>Xera.Tablist</groupId>
+    <artifactId>XeraTablist</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>LeeesTablist</name>
+    <name>XeraTablist</name>
 
-    <description>A tablist plugin for 6b6t</description>
+    <description>Most advanced tablist plugin for anarchy servers out there! ;)</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>http://6b6t.org</url>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -33,7 +32,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/xeraTablist/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
@@ -41,22 +40,16 @@
 
     <repositories>
         <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
+        <repository>
+            <id>papermc</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
@@ -64,11 +57,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.12.2</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/spigot.jar</systemPath>
+            <groupId>com.destroystokyo.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

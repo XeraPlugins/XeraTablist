@@ -1,35 +1,22 @@
-package Leees.Tablist.Tablist;
+package Xera.Tablist.Tablist;
 
-import Leees.Tablist.Main;
-import me.clip.placeholderapi.PlaceholderAPI;
-import net.minecraft.server.v1_12_R1.ChatComponentText;
-import net.minecraft.server.v1_12_R1.PacketPlayOutPlayerListHeaderFooter;
+import Xera.Tablist.XeraTablist;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 import java.util.List;
 
 public class Tablist implements Runnable {
-    Main main;
+    XeraTablist xeraTablist;
 
-    public Tablist(Main main) {
-        this.main = main;
+    public Tablist(XeraTablist xeraTablist) {
+        this.xeraTablist = xeraTablist;
     }
 
     public void run() {
-        PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
-
         try {
-            Field a = packet.getClass().getDeclaredField("a");
-            a.setAccessible(true);
-            Field b = packet.getClass().getDeclaredField("b");
-            b.setAccessible(true);
-
             if (Bukkit.getOnlinePlayers().size() == 0) {
                 return;
             }
@@ -37,8 +24,8 @@ public class Tablist implements Runnable {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 StringBuilder head = new StringBuilder();
                 StringBuilder footer = new StringBuilder();
-                List<String> headerlist = main.getConfig().getStringList("tablist.header");
-                List<String> footerlist = main.getConfig().getStringList("tablist.footer");
+                List<String> headerlist = xeraTablist.getConfig().getStringList("tablist.header");
+                List<String> footerlist = xeraTablist.getConfig().getStringList("tablist.footer");
 
                 for (int i = 0; i < headerlist.size(); i++) {
                     if (i == (headerlist.size() - 1)) {
@@ -56,11 +43,7 @@ public class Tablist implements Runnable {
                     }
                 }
 
-                a.set(packet, new ChatComponentText(Main.parseText(player, head.toString())));
-
-                b.set(packet, new ChatComponentText(Main.parseText(player, footer.toString())));
-
-                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+                player.setPlayerListHeaderFooter(new ComponentBuilder(XeraTablist.parseText(player, head.toString())).create(), new ComponentBuilder(XeraTablist.parseText(player, footer.toString())).create());
             }
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | NoSuchFieldException e) {
             e.printStackTrace();

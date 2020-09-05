@@ -1,9 +1,8 @@
 name: LeeesTablist
 version: 2.1.0
-main: Leees.Tablist.Main
+main: Xera.Tablist.XeraTablist
 authors: [Nate, Legault]
 description: A Tablist plugin for 6b6t
-website: http://6b6t.org
 softdepend: [PlaceholderAPI]
 commands:
   tabrconfig:

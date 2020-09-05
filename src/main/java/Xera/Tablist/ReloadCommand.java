@@ -1,4 +1,4 @@
-package Leees.Tablist;
+package Xera.Tablist;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,19 +7,19 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class ReloadCommand implements CommandExecutor {
-    Main main;
-    public ReloadCommand(Main main) {
-        this.main = main;
+    XeraTablist xeraTablist;
+    public ReloadCommand(XeraTablist xeraTablist) {
+        this.xeraTablist = xeraTablist;
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof ConsoleCommandSender) {
-            main.reloadConfig();
+            xeraTablist.reloadConfig();
             sender.sendMessage("Reloaded Config");
         }
 
         if (sender instanceof Player && sender.isOp()) {
-            main.reloadConfig();
+            xeraTablist.reloadConfig();
             sender.sendMessage("Reloaded Config");
         }
 

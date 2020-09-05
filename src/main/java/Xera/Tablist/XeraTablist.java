@@ -1,7 +1,7 @@
-package Leees.Tablist;
+package Xera.Tablist;
 
-import Leees.Tablist.Tablist.TabUtil;
-import Leees.Tablist.Tablist.Tablist;
+import Xera.Tablist.Tablist.TabUtil;
+import Xera.Tablist.Tablist.Tablist;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
-public class Main extends JavaPlugin implements Listener {
+public class XeraTablist extends JavaPlugin implements Listener {
     FileConfiguration config = getConfig();
     public static long starttime;
     public static boolean haspapi = false;
@@ -55,7 +55,7 @@ public class Main extends JavaPlugin implements Listener {
         newtext = newtext
                 .replaceAll("<tps>", TabUtil.getTps())
                 .replaceAll("<ping>", String.valueOf(ping))
-                .replaceAll("<uptime>", TabUtil.GetFormattedInterval(System.currentTimeMillis() - Main.starttime))
+                .replaceAll("<uptime>", TabUtil.GetFormattedInterval(System.currentTimeMillis() - XeraTablist.starttime))
                 .replaceAll("<players>", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
 
         return newtext;
