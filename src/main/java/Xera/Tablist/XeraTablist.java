@@ -35,7 +35,7 @@ public class XeraTablist extends JavaPlugin implements Listener {
             haspapi = true;
         }
 
-        log.info("LeeesTablist enabled");
+        log.info("XeraTablist enabled");
     }
 
     public static String parseText(Player player, String text) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
