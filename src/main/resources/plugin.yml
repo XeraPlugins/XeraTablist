@@ -1,8 +1,8 @@
 name: XeraTablist
-version: 2.1.0
+version: 1.0.0
 main: Xera.Tablist.XeraTablist
-authors: [Nate, Legault]
-description: A Tablist plugin for 6b6t
+authors: [Nate Legault, Pistonmaster]
+description: Most advanced tablist plugin for anarchy servers out there!
 softdepend: [PlaceholderAPI]
 commands:
   tabrconfig:

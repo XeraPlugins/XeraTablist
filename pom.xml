@@ -11,7 +11,7 @@
 
     <name>XeraTablist</name>
 
-    <description>Most advanced tablist plugin for anarchy servers out there! ;)</description>
+    <description>Most advanced tablist plugin for anarchy servers out there!</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,7 +32,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/xeraTablist/resources</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
