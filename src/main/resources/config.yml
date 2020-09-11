@@ -1,17 +1,18 @@
-# It's recommended to change every "SERVERNAME" to your servers name
+# It's recommended to change every "XeraTalist" to your servers name
 
 tablist:
   header:
     - ""
-    - "&bSERVERNAME"
+    - "&4Xera&3Tablist"
     - ""
     - "&6This the default Tablist for XeraTablist"
     - ""
   footer:
     - ""
-    - "&7tps: %tps% &7ping: &f%ping% &7players: &f%players% &7uptime: &f%uptime%"
+    - "&3%tps% tps — %players% players — %ping% ping — %uptime% uptime"
     - ""
-    - "&7contact: someone@example.com"
-    - "&7discussion: http://discord.example.com"
-    - "&7website: https://www.example.com"
-    - "&7These are the only official SERVERNAME websites and contacts"
+    - "&7contact: Leee#2021"
+    - "&7discussion: https://discord.gg/KgrrEQr"
+    - "&7website: xera.ca"
+    - "&7these are the only official xera websites and contacts."
+    - ""
