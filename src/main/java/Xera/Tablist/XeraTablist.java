@@ -7,10 +7,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
 public class XeraTablist extends JavaPlugin implements Listener {
     public static long starttime;
+    public static boolean haspapi = false;
 
     public void onEnable() {
         Logger log = getLogger();
@@ -20,19 +22,36 @@ public class XeraTablist extends JavaPlugin implements Listener {
 
         starttime = System.currentTimeMillis();
         this.getCommand("tabrconfig").setExecutor(new ReloadCommand(this));
+        Bukkit.getScheduler().runTaskTimer(this, new Tablist(this), 0, 10L);
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            haspapi = true;
+        }
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Tablist(this), 0, 20);
 
         log.info("XeraTablist enabled");
     }
 
-    public static String parseText(Player player, String text) {
-        String newtext;
+    public static String parseText(Player player, String text) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        String newtext = text;
+        Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
+        int ping = (Integer) entityPlayer.getClass().getField("ping").get(entityPlayer);
 
         // PAPI
-        newtext = PlaceholderAPI.setPlaceholders(player, text);
+        if (haspapi) {
+            newtext = PlaceholderAPI.setPlaceholders(player, text);
+        }
 
         // ChatColor
         newtext = ChatColor.translateAlternateColorCodes('&', newtext);
+
+        // Custom Placeholders
+        newtext = newtext
+                .replaceAll("%tps%", TabUtil.getTps())
+                .replaceAll("%ping%", String.valueOf(ping))
+                .replaceAll("%uptime%", TabUtil.GetFormattedInterval(System.currentTimeMillis() - XeraTablist.starttime))
+                .replaceAll("%players%", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
 
         return newtext;
     }

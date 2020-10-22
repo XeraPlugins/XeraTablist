@@ -2,9 +2,9 @@ name: XeraTablist
 version: ${project.version}
 main: Xera.Tablist.XeraTablist
 authors: [Nate Legault, Pistonmaster]
-description: Most advanced tablist plugin for anarchy servers out there!
-depend: [PlaceholderAPI]
+description: ${project.description}
+softdepend: [PlaceholderAPI]
 commands:
   tabrconfig:
-    description: reload ReloadCommand
+    description: Reload the config
     usage: /tabrconfig

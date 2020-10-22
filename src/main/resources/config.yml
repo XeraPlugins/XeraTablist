@@ -9,7 +9,7 @@ tablist:
     - ""
   footer:
     - ""
-    - "%server_tps_1_colored%&3 tps — %bungee_total% players — %player_ping% ping —  %PlayTimes_uptime% uptime"
+    - "&3%tps% tps — %players% players — %ping% ping — %uptime% uptime"
     - ""
     - "&7contact: Leee#2021"
     - "&7discussion: https://discord.gg/KgrrEQr"
