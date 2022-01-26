@@ -1,5 +1,6 @@
 package Xera.Tablist;
 
+import lombok.Getter;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,24 +9,30 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class XeraTablist extends JavaPlugin implements Listener {
-    public static long starttime;
-    public static boolean haspapi = false;
+    public static long startTime;
+    public static boolean hasPapi = false;
+    @Getter
+    public String header;
+    @Getter
+    public String footer;
 
     public void onEnable() {
         Logger log = getLogger();
 
         log.info("Loading config");
         saveDefaultConfig();
+        loadConfig();
 
-        starttime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
         this.getCommand("tabrconfig").setExecutor(new ReloadCommand(this));
-        Bukkit.getScheduler().runTaskTimer(this, new Tablist(this), 0, 10L);
+        Bukkit.getScheduler().runTaskTimer(this, new Tablist(this), 0, getConfig().getInt("delay"));
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            haspapi = true;
+            hasPapi = true;
         }
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Tablist(this), 0, 20);
@@ -34,25 +41,56 @@ public class XeraTablist extends JavaPlugin implements Listener {
     }
 
     public static String parseText(Player player, String text) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String newtext = text;
         Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
         int ping = (Integer) entityPlayer.getClass().getField("ping").get(entityPlayer);
 
         // PAPI
-        if (haspapi) {
-            newtext = PlaceholderAPI.setPlaceholders(player, text);
+        if (hasPapi) {
+            text = PlaceholderAPI.setPlaceholders(player, text);
         }
 
         // ChatColor
-        newtext = ChatColor.translateAlternateColorCodes('&', newtext);
+        text = ChatColor.translateAlternateColorCodes('&', text);
 
         // Custom Placeholders
-        newtext = newtext
+        text = text
                 .replaceAll("%tps%", TabUtil.getTps())
                 .replaceAll("%ping%", String.valueOf(ping))
-                .replaceAll("%uptime%", TabUtil.GetFormattedInterval(System.currentTimeMillis() - XeraTablist.starttime))
+                .replaceAll("%uptime%", TabUtil.getFormattedInterval(System.currentTimeMillis() - XeraTablist.startTime))
                 .replaceAll("%players%", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
 
-        return newtext;
+        return text;
+    }
+
+    @Override
+    public void reloadConfig() {
+        super.reloadConfig();
+        loadConfig();
+    }
+
+    public void loadConfig() {
+        StringBuilder header = new StringBuilder();
+        StringBuilder footer = new StringBuilder();
+        List<String> headerList = getConfig().getStringList("tablist.header");
+        List<String> footerList = getConfig().getStringList("tablist.footer");
+
+        for (int i = 0; i < headerList.size(); i++) {
+            if (i == (headerList.size() - 1)) {
+                header.append(headerList.get(i));
+            } else {
+                header.append(headerList.get(i)).append("\n");
+            }
+        }
+
+        for (int i = 0; i < footerList.size(); i++) {
+            if (i == (footerList.size() - 1)) {
+                footer.append(footerList.get(i));
+            } else {
+                footer.append(footerList.get(i)).append("\n");
+            }
+        }
+
+        this.header = header.toString();
+        this.footer = footer.toString();
     }
 }

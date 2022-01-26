@@ -1,47 +1,27 @@
 package Xera.Tablist;
 
+import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+import java.util.Collection;
 
+@RequiredArgsConstructor
 public class Tablist implements Runnable {
-    XeraTablist xeraTablist;
-
-    public Tablist(XeraTablist xeraTablist) {
-        this.xeraTablist = xeraTablist;
-    }
+    private final XeraTablist plugin;
 
     public void run() {
+        Collection<? extends Player> players = plugin.getServer().getOnlinePlayers();
         try {
-            if (Bukkit.getOnlinePlayers().size() == 0) {
+            if (players.size() == 0) {
                 return;
             }
 
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                StringBuilder head = new StringBuilder();
-                StringBuilder footer = new StringBuilder();
-                List<String> headerlist = xeraTablist.getConfig().getStringList("tablist.header");
-                List<String> footerlist = xeraTablist.getConfig().getStringList("tablist.footer");
-
-                for (int i = 0; i < headerlist.size(); i++) {
-                    if (i == (headerlist.size() - 1)) {
-                        head.append(headerlist.get(i));
-                    } else {
-                        head.append(headerlist.get(i)).append("\n");
-                    }
-                }
-
-                for (int i = 0; i < footerlist.size(); i++) {
-                    if (i == (footerlist.size() - 1)) {
-                        footer.append(footerlist.get(i));
-                    } else {
-                        footer.append(footerlist.get(i)).append("\n");
-                    }
-                }
-
-                player.setPlayerListHeaderFooter(new ComponentBuilder(XeraTablist.parseText(player, head.toString())).create(), new ComponentBuilder(XeraTablist.parseText(player, footer.toString())).create());
+            for (Player player : players) {
+                player.setPlayerListHeaderFooter(
+                        new ComponentBuilder(XeraTablist.parseText(player, plugin.getHeader())).create(),
+                        new ComponentBuilder(XeraTablist.parseText(player, plugin.getFooter())).create());
             }
         } catch (Exception e) {
             e.printStackTrace();

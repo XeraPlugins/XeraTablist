@@ -1,5 +1,7 @@
 # It's recommended to change every "XeraTalist" to your servers name
 
+delay: 20 # Delay for each tab update in ticks. 1 second = 20 ticks (changing requires server restart)
+
 tablist:
   header:
     - ""
@@ -11,7 +13,7 @@ tablist:
     - ""
     - "&3%tps% tps — %players% players — %ping% ping — %uptime% uptime"
     - ""
-    - "&7contact: Leee#2021"
+    - "&7contact: Leee#1858"
     - "&7discussion: https://discord.gg/KgrrEQr"
     - "&7website: xera.ca"
     - "&7these are the only official xera websites and contacts."
